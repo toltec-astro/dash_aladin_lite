@@ -1,0 +1,515 @@
+{
+  "src/lib/components/DashAladinLite.react.js": {
+    "description": "DashAladinLite",
+    "displayName": "DashAladinLite",
+    "methods": [],
+    "props": {
+      "id": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "The ID used to identify this component in Dash callbacks."
+      },
+      "setProps": {
+        "type": {
+          "name": "func"
+        },
+        "required": false,
+        "description": "Dash-assigned callback that should be called to report property changes\nto Dash, to make them available for callbacks."
+      },
+      "className": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "The class of the container."
+      },
+      "style": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": "The style of the container."
+      },
+      "target": {
+        "type": {
+          "name": "string"
+        },
+        "required": true,
+        "description": "The target to display."
+      },
+      "fov": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "The FOV of the display.",
+        "defaultValue": {
+          "value": "10",
+          "computed": false
+        }
+      },
+      "autoFov": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "Adjust the fov automatically for target if set to True.",
+        "defaultValue": {
+          "value": "false",
+          "computed": false
+        }
+      },
+      "survey": {
+        "type": {
+          "name": "union",
+          "value": [
+            {
+              "name": "string"
+            },
+            {
+              "name": "shape",
+              "value": {
+                "id": {
+                  "name": "string",
+                  "required": false
+                },
+                "name": {
+                  "name": "string",
+                  "required": false
+                },
+                "rootUrl": {
+                  "name": "string",
+                  "required": false
+                },
+                "cooFrame": {
+                  "name": "enum",
+                  "value": [
+                    {
+                      "value": "'equatorial'",
+                      "computed": false
+                    },
+                    {
+                      "value": "'galactic'",
+                      "computed": false
+                    }
+                  ],
+                  "required": false
+                },
+                "maxOrder": {
+                  "name": "number",
+                  "required": false
+                },
+                "options": {
+                  "name": "shape",
+                  "value": {
+                    "imgFormat": {
+                      "name": "enum",
+                      "value": [
+                        {
+                          "value": "'jpeg'",
+                          "computed": false
+                        },
+                        {
+                          "value": "'fits'",
+                          "computed": false
+                        },
+                        {
+                          "value": "'png'",
+                          "computed": false
+                        }
+                      ],
+                      "required": false
+                    }
+                  },
+                  "required": false
+                }
+              }
+            }
+          ]
+        },
+        "required": false,
+        "description": "The survey to display as base image layer.",
+        "defaultValue": {
+          "value": "'P/DSS2/color'",
+          "computed": false
+        }
+      },
+      "layers": {
+        "type": {
+          "name": "arrayOf",
+          "value": {
+            "name": "union",
+            "value": [
+              {
+                "name": "shape",
+                "value": {
+                  "type": {
+                    "name": "enum",
+                    "value": [
+                      {
+                        "value": "\"catalog\"",
+                        "computed": false
+                      }
+                    ],
+                    "required": false
+                  },
+                  "data": {
+                    "name": "union",
+                    "value": [
+                      {
+                        "name": "string"
+                      },
+                      {
+                        "name": "arrayOf",
+                        "value": {
+                          "name": "shape",
+                          "value": {
+                            "ra": {
+                              "name": "number",
+                              "required": false
+                            },
+                            "dec": {
+                              "name": "number",
+                              "required": false
+                            }
+                          }
+                        }
+                      }
+                    ],
+                    "required": false
+                  },
+                  "options": {
+                    "name": "shape",
+                    "value": {
+                      "show": {
+                        "name": "bool",
+                        "required": false
+                      },
+                      "name": {
+                        "name": "string",
+                        "required": false
+                      },
+                      "color": {
+                        "name": "string",
+                        "required": false
+                      },
+                      "sourceSize": {
+                        "name": "number",
+                        "required": false
+                      },
+                      "shape": {
+                        "name": "enum",
+                        "value": [
+                          {
+                            "value": "'circle'",
+                            "computed": false
+                          },
+                          {
+                            "value": "\"plus\"",
+                            "computed": false
+                          },
+                          {
+                            "value": "\"rhomb\"",
+                            "computed": false
+                          },
+                          {
+                            "value": "'cross'",
+                            "computed": false
+                          },
+                          {
+                            "value": "'triangle'",
+                            "computed": false
+                          },
+                          {
+                            "value": "'square'",
+                            "computed": false
+                          }
+                        ],
+                        "required": false
+                      },
+                      "maxNbsources": {
+                        "name": "number",
+                        "required": false
+                      },
+                      "raField": {
+                        "name": "string",
+                        "required": false
+                      },
+                      "decField": {
+                        "name": "string",
+                        "required": false
+                      },
+                      "displayLabel": {
+                        "name": "bool",
+                        "required": false
+                      },
+                      "labelColor": {
+                        "name": "string",
+                        "required": false
+                      },
+                      "labelFont": {
+                        "name": "string",
+                        "required": false
+                      },
+                      "labelColumn": {
+                        "name": "string",
+                        "required": false
+                      },
+                      "onClick": {
+                        "name": "enum",
+                        "value": [
+                          {
+                            "value": "'showTable'",
+                            "computed": false
+                          },
+                          {
+                            "value": "'showPopup'",
+                            "computed": false
+                          }
+                        ],
+                        "required": false
+                      }
+                    },
+                    "required": false
+                  }
+                }
+              },
+              {
+                "name": "shape",
+                "value": {
+                  "type": {
+                    "name": "enum",
+                    "value": [
+                      {
+                        "value": "\"overlay\"",
+                        "computed": false
+                      }
+                    ],
+                    "required": false
+                  },
+                  "data": {
+                    "name": "arrayOf",
+                    "value": {
+                      "name": "union",
+                      "value": [
+                        {
+                          "name": "shape",
+                          "value": {
+                            "type": {
+                              "name": "enum",
+                              "value": [
+                                {
+                                  "value": "'circle'",
+                                  "computed": false
+                                }
+                              ],
+                              "required": false
+                            },
+                            "ra": {
+                              "name": "number",
+                              "required": false
+                            },
+                            "dec": {
+                              "name": "number",
+                              "required": false
+                            },
+                            "radius": {
+                              "name": "number",
+                              "required": false
+                            },
+                            "color": {
+                              "name": "string",
+                              "required": false
+                            }
+                          }
+                        },
+                        {
+                          "name": "shape",
+                          "value": {
+                            "type": {
+                              "name": "enum",
+                              "value": [
+                                {
+                                  "value": "'polyline'",
+                                  "computed": false
+                                }
+                              ],
+                              "required": false
+                            },
+                            "data": {
+                              "name": "arrayOf",
+                              "value": {
+                                "name": "array"
+                              },
+                              "required": false
+                            },
+                            "color": {
+                              "name": "string",
+                              "required": false
+                            },
+                            "lineWidth": {
+                              "name": "number",
+                              "required": false
+                            }
+                          }
+                        },
+                        {
+                          "name": "shape",
+                          "value": {
+                            "type": {
+                              "name": "enum",
+                              "value": [
+                                {
+                                  "value": "'polygon'",
+                                  "computed": false
+                                }
+                              ],
+                              "required": false
+                            },
+                            "data": {
+                              "name": "arrayOf",
+                              "value": {
+                                "name": "array"
+                              },
+                              "required": false
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    "required": false
+                  },
+                  "options": {
+                    "name": "shape",
+                    "value": {
+                      "show": {
+                        "name": "bool",
+                        "required": false
+                      },
+                      "name": {
+                        "name": "string",
+                        "required": false
+                      },
+                      "color": {
+                        "name": "string",
+                        "required": false
+                      },
+                      "lineWidth": {
+                        "name": "number",
+                        "required": false
+                      }
+                    },
+                    "required": false
+                  }
+                }
+              },
+              {
+                "name": "shape",
+                "value": {
+                  "type": {
+                    "name": "enum",
+                    "value": [
+                      {
+                        "value": "'moc'",
+                        "computed": false
+                      }
+                    ],
+                    "required": false
+                  },
+                  "data": {
+                    "name": "union",
+                    "value": [
+                      {
+                        "name": "string"
+                      },
+                      {
+                        "name": "object"
+                      }
+                    ],
+                    "required": false
+                  },
+                  "options": {
+                    "name": "shape",
+                    "value": {
+                      "show": {
+                        "name": "bool",
+                        "required": false
+                      },
+                      "name": {
+                        "name": "string",
+                        "required": false
+                      },
+                      "color": {
+                        "name": "string",
+                        "required": false
+                      },
+                      "opacity": {
+                        "name": "number",
+                        "required": false
+                      },
+                      "adaptativeDisplay": {
+                        "name": "bool",
+                        "required": false
+                      }
+                    },
+                    "required": false
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "required": false,
+        "description": "Layers to show.\nEach layer can be one of types ['catalog', 'overlay', 'moc']."
+      },
+      "options": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": "Additional options passed to the aladinlite.js",
+        "defaultValue": {
+          "value": "{\n    \"showFullscreenControl\": false,\n}",
+          "computed": false
+        }
+      },
+      "objectClicked": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": "Clicked object."
+      },
+      "objectHovered": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": "Hovered object."
+      },
+      "footprintClicked": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": "Clicked footprint."
+      },
+      "footprintHovered": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": "Hovered footprint."
+      },
+      "position": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": "Position."
+      }
+    }
+  }
+}
