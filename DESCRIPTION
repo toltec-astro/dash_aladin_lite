@@ -1,13 +1,13 @@
 Package: dashAladinLite
 Title: Dash component for Aladin Lite.
-Version: 0.0.1
+Version: 0.1.0
 Description: Dash component for Aladin Lite.
 Depends: R (>= 3.0.2)
 Imports: 
 Suggests: 
 License: BSD + file LICENSE
-URL: https://github.com/toltec-astro/dash-aladin-lite
-BugReports: https://github.com/toltec-astro/dash-aladin-lite/issues
+URL: https://github.com/toltec-astro/dash_aladin_lite
+BugReports: https://github.com/toltec-astro/dash_aladin_lite/issues
 Encoding: UTF-8
 LazyData: true
 KeepSource: true
