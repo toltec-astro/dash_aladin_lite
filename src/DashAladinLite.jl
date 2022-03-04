@@ -3,7 +3,7 @@ module DashAladinLite
 using Dash
 
 const resources_path = realpath(joinpath( @__DIR__, "..", "deps"))
-const version = "0.1.0"
+const version = "0.1.1"
 
 include("jl/dal_dashaladinlite.jl")
 
@@ -30,14 +30,14 @@ DashBase.Resource(
 ),
 DashBase.Resource(
     relative_package_path = "dash_aladin_lite.min.js",
-    external_url = "https://unpkg.com/dash_aladin_lite@0.1.0/dash_aladin_lite/dash_aladin_lite.min.js",
+    external_url = "https://unpkg.com/dash_aladin_lite@0.1.1/dash_aladin_lite/dash_aladin_lite.min.js",
     dynamic = nothing,
     async = nothing,
     type = :js
 ),
 DashBase.Resource(
     relative_package_path = "dash_aladin_lite.min.js.map",
-    external_url = "https://unpkg.com/dash_aladin_lite@0.1.0/dash_aladin_lite/dash_aladin_lite.min.js.map",
+    external_url = "https://unpkg.com/dash_aladin_lite@0.1.1/dash_aladin_lite/dash_aladin_lite.min.js.map",
     dynamic = true,
     async = nothing,
     type = :js
