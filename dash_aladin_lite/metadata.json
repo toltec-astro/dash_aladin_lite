@@ -475,6 +475,20 @@
           "computed": false
         }
       },
+      "custom_scripts": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": "Custom scripts to be used in ``custom_script_calls``.\nThe values are inline functions that have signature like\n``function(aladin, data, props)``, where data are\npassed in ``custom_script_calls``."
+      },
+      "custom_script_calls": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": "Custom script calls to make. The keys should match those in\n``custom_script``, and the vialues are passed to\n``custom_scripts``."
+      },
       "objectClicked": {
         "type": {
           "name": "object"

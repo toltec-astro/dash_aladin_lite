@@ -1,9 +1,11 @@
 import dash_aladin_lite as dal
 import dash
 import dash_bootstrap_components as dbc
-from dash import html, Input, Output, dcc
+from dash import html, Input, Output, State, dcc
 import pandas as pd
 import yaml
+from dash_extensions.javascript import assign
+
 
 app = dash.Dash(__name__)
 
@@ -137,6 +139,16 @@ app.layout = html.Div([
             'options': {
                 'imgFormat': 'png'
                 }
+            },
+        custom_scripts = { 
+            "animateTo": assign("""
+                function(aladinlite, data, props) {
+                    console.log("inside function")
+                    console.log("data:", data);
+                    console.log(props);
+                    const {ra, dec} = data;
+                    aladinlite.aladin.animateToRaDec(ra, dec);
+                }"""),
             }
     ),
     dcc.Slider(0, 20, 1,
@@ -171,6 +183,9 @@ app.layout = html.Div([
         value='M1',
         id='t'
         ),
+    dbc.Button(
+        id='b'
+        ),
     html.Pre(id='output'),
 ])
 
@@ -198,6 +213,13 @@ def change_survey(survey_value):
 def change_target(target_value):
     return target_value
 
+@app.callback(
+    Output('a', 'custom_script_calls'), [Input('b', 'n_clicks')], prevent_initial_call=True)
+def command(n_clicks):
+    return {"animateTo": {
+            "ra": n_clicks,
+            "dec": n_clicks,
+            }}
 
 @app.callback(
     Output('output', 'children'), inputs={

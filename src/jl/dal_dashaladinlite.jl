@@ -11,6 +11,13 @@ Keyword arguments:
 - `id` (String; optional): The ID used to identify this component in Dash callbacks.
 - `autoFov` (Bool; optional): Adjust the fov automatically for target if set to True.
 - `className` (String; optional): The class of the container.
+- `custom_script_calls` (Dict; optional): Custom script calls to make. The keys should match those in
+``custom_script``, and the vialues are passed to
+``custom_scripts``.
+- `custom_scripts` (Dict; optional): Custom scripts to be used in ``custom_script_calls``.
+The values are inline functions that have signature like
+``function(aladin, data, props)``, where data are
+passed in ``custom_script_calls``.
 - `footprintClicked` (Dict; optional): Clicked footprint.
 - `footprintHovered` (Dict; optional): Hovered footprint.
 - `fov` (Real; optional): The FOV of the display.
@@ -88,7 +95,7 @@ Those elements have the following types:
 - `target` (String; required): The target to display.
 """
 function dal_dashaladinlite(; kwargs...)
-        available_props = Symbol[:id, :autoFov, :className, :footprintClicked, :footprintHovered, :fov, :layers, :objectClicked, :objectHovered, :options, :position, :style, :survey, :target]
+        available_props = Symbol[:id, :autoFov, :className, :custom_script_calls, :custom_scripts, :footprintClicked, :footprintHovered, :fov, :layers, :objectClicked, :objectHovered, :options, :position, :style, :survey, :target]
         wild_props = Symbol[]
         return Component("dal_dashaladinlite", "DashAladinLite", "dash_aladin_lite", available_props, wild_props; kwargs...)
 end

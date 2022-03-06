@@ -18,6 +18,16 @@ Keyword arguments:
 - className (string; optional):
     The class of the container.
 
+- custom_script_calls (dict; optional):
+    Custom script calls to make. The keys should match those in
+    ``custom_script``, and the vialues are passed to
+    ``custom_scripts``.
+
+- custom_scripts (dict; optional):
+    Custom scripts to be used in ``custom_script_calls``. The values
+    are inline functions that have signature like ``function(aladin,
+    data, props)``, where data are passed in ``custom_script_calls``.
+
 - footprintClicked (dict; optional):
     Clicked footprint.
 
@@ -174,12 +184,12 @@ Keyword arguments:
 - target (string; required):
     The target to display."""
     @_explicitize_args
-    def __init__(self, id=Component.UNDEFINED, className=Component.UNDEFINED, style=Component.UNDEFINED, target=Component.REQUIRED, fov=Component.UNDEFINED, autoFov=Component.UNDEFINED, survey=Component.UNDEFINED, layers=Component.UNDEFINED, options=Component.UNDEFINED, objectClicked=Component.UNDEFINED, objectHovered=Component.UNDEFINED, footprintClicked=Component.UNDEFINED, footprintHovered=Component.UNDEFINED, position=Component.UNDEFINED, **kwargs):
-        self._prop_names = ['id', 'autoFov', 'className', 'footprintClicked', 'footprintHovered', 'fov', 'layers', 'objectClicked', 'objectHovered', 'options', 'position', 'style', 'survey', 'target']
+    def __init__(self, id=Component.UNDEFINED, className=Component.UNDEFINED, style=Component.UNDEFINED, target=Component.REQUIRED, fov=Component.UNDEFINED, autoFov=Component.UNDEFINED, survey=Component.UNDEFINED, layers=Component.UNDEFINED, options=Component.UNDEFINED, custom_scripts=Component.UNDEFINED, custom_script_calls=Component.UNDEFINED, objectClicked=Component.UNDEFINED, objectHovered=Component.UNDEFINED, footprintClicked=Component.UNDEFINED, footprintHovered=Component.UNDEFINED, position=Component.UNDEFINED, **kwargs):
+        self._prop_names = ['id', 'autoFov', 'className', 'custom_script_calls', 'custom_scripts', 'footprintClicked', 'footprintHovered', 'fov', 'layers', 'objectClicked', 'objectHovered', 'options', 'position', 'style', 'survey', 'target']
         self._type = 'DashAladinLite'
         self._namespace = 'dash_aladin_lite'
         self._valid_wildcard_attributes =            []
-        self.available_properties = ['id', 'autoFov', 'className', 'footprintClicked', 'footprintHovered', 'fov', 'layers', 'objectClicked', 'objectHovered', 'options', 'position', 'style', 'survey', 'target']
+        self.available_properties = ['id', 'autoFov', 'className', 'custom_script_calls', 'custom_scripts', 'footprintClicked', 'footprintHovered', 'fov', 'layers', 'objectClicked', 'objectHovered', 'options', 'position', 'style', 'survey', 'target']
         self.available_wildcard_properties =            []
         _explicit_args = kwargs.pop('_explicit_args')
         _locals = locals()

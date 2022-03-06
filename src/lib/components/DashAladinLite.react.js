@@ -42,25 +42,28 @@ export default class DashAladinLite extends Component {
 
     componentDidUpdate(prevProps) {
         var changedProps = {};
-        const {fov, } = this.props;
+        const {fov} = this.props;
         // The fov has some inaccuracy so we need to count for that.
-        if ((isNil(prevProps.fov)) && (!isNil(fov)) ||
-            ((!isNil(prevProps.fov)) && (!isNil(fov)) &&
-             ((prevProps.fov / fov <= 0.9) ||
-              (prevProps.fov / fov >= (1. / 0.9))) &&
-             (fov > 0.)
-            )
-        ) {
-            // update to new fov
-            changedProps['fov'] = fov;
+        if (!isNil(fov)) {
+            if (!isNil(prevProps.fov)) {
+                // compute zoom level and compare
+                // this is from the aladin.js code
+                var pzl = Math.log(180/prevProps.fov)/Math.log(1.15);
+                var zl = Math.log(180/fov)/Math.log(1.15);
+                if (Math.abs(pzl - zl) >= 0.9) {
+                    changedProps['fov'] = fov;
+                }
+            } else {
+                changedProps['fov'] = fov;
+            }
         }
         // other changed props
-        ["autoFov", "target", "survey", "layers"].forEach(name => {
+        ["autoFov", "target", "survey", "layers", "custom_script_calls"].forEach(name => {
             if (prevProps[name] !== this.props[name]) {
                 changedProps[name] = this.props[name];
             }
         });
-        this.aladin.update(changedProps);
+        this.aladin.update(changedProps, this.props);
     }
 
     render() {
@@ -229,6 +232,21 @@ DashAladinLite.propTypes = {
      * Additional options passed to the aladinlite.js
      */
     options: PropTypes.object,
+    
+    /**
+     * Custom scripts to be used in ``custom_script_calls``.
+     * The values are inline functions that have signature like
+     * ``function(aladin, data, props)``, where data are
+     * passed in ``custom_script_calls``.
+     */
+    custom_scripts: PropTypes.object,
+    
+    /**
+     * Custom script calls to make. The keys should match those in
+     * ``custom_script``, and the vialues are passed to
+     * ``custom_scripts``.
+     */
+    custom_script_calls: PropTypes.object,
 
     /**
      * Clicked object.

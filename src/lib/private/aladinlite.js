@@ -1,6 +1,7 @@
 import {
     isNil
 } from "ramda";
+import _ from "lodash";
 
 export default class AladinLite {
     constructor(el, al, handlers) {
@@ -59,10 +60,13 @@ export default class AladinLite {
             fov,
             autoFov,
             survey,
-            layers} = al;
+            layers,
+            custom_scripts,
+            custom_script_calls} = al;
         // save some non-aladin states
         self._target = target;
         self._autoFov = autoFov;
+        self._custom_scripts = custom_scripts;
 
         var init_options = {
             ...Aladin.DEFAULT_OPTIONS,
@@ -82,12 +86,11 @@ export default class AladinLite {
         // call self.update for catalog and other stuff
         self.update({
             "layers": layers,
-            });
+            "custom_script_calls": custom_script_calls
+            }, al);
         // some other options
         const {showLayerBox} = al.options;
-        if (!isNil(showLayerBox)) {
-            self.aladin.showLayerBox();
-        }
+        self._showLayerBox = showLayerBox || false;
     };
 
     resolveSurvey(survey) {
@@ -101,7 +104,7 @@ export default class AladinLite {
         return _survey
     };
 
-    update(changedProps) {
+    update(changedProps, props) {
         const self = this;
         var aladin = self.aladin;
         const {
@@ -109,7 +112,8 @@ export default class AladinLite {
             autoFov,
             target,
             survey,
-            layers} = changedProps;
+            layers,
+            custom_script_calls} = changedProps;
         if (!isNil(fov)) {
             aladin.setFoV(fov);
         }
@@ -122,6 +126,9 @@ export default class AladinLite {
         if (!isNil(layers)) {
             self.aladin.removeLayers();
             self.addLayers(layers);
+            if (self._showLayerBox) {
+                self.aladin.showLayerBox();
+            }
         }
         if (!isNil(target)) {
             self._target = target;
@@ -129,6 +136,14 @@ export default class AladinLite {
             if (self._autoFov && isNil(fov)) {
                 aladin.adjustFovForObject(self._target)
             }
+        }
+        if (!isNil(custom_script_calls)) {
+            Object.keys(custom_script_calls).forEach(name => {
+                var fn = self._custom_scripts[name]?.variable;
+                var fn = _.get(window, fn);
+                console.log("call custom script:", fn);
+                fn(self, custom_script_calls[name], props);
+            });
         }
     };
 

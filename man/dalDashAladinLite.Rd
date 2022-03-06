@@ -11,6 +11,7 @@ DashAladinLite
 
 \usage{
 dalDashAladinLite(id=NULL, autoFov=NULL, className=NULL,
+custom_script_calls=NULL, custom_scripts=NULL,
 footprintClicked=NULL, footprintHovered=NULL, fov=NULL,
 layers=NULL, objectClicked=NULL, objectHovered=NULL,
 options=NULL, position=NULL, style=NULL, survey=NULL,
@@ -23,6 +24,15 @@ target=NULL)
 \item{autoFov}{Logical. Adjust the fov automatically for target if set to True.}
 
 \item{className}{Character. The class of the container.}
+
+\item{custom_script_calls}{Named list. Custom script calls to make. The keys should match those in
+``custom_script``, and the vialues are passed to
+``custom_scripts``.}
+
+\item{custom_scripts}{Named list. Custom scripts to be used in ``custom_script_calls``.
+The values are inline functions that have signature like
+``function(aladin, data, props)``, where data are
+passed in ``custom_script_calls``.}
 
 \item{footprintClicked}{Named list. Clicked footprint.}
 
