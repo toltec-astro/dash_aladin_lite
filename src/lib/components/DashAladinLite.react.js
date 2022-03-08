@@ -31,7 +31,7 @@ export default class DashAladinLite extends Component {
                 this.props.setProps({position: obj});
             },
             'zoomChanged': obj => {
-                this.props.setProps({fov: obj});
+                // this.props.setState({fov: obj});
             },
             'click': null,
             'mouseMove': null,
@@ -50,10 +50,18 @@ export default class DashAladinLite extends Component {
                 // this is from the aladin.js code
                 var pzl = Math.log(180/prevProps.fov)/Math.log(1.15);
                 var zl = Math.log(180/fov)/Math.log(1.15);
-                if (Math.abs(pzl - zl) >= 0.9) {
+                // console.log("update fov")
+                // console.log("pzl", pzl)
+                // console.log("zl", zl)
+                // console.log("diff", Math.abs(pzl - zl))
+                if (Math.abs(pzl - zl) >= 0.98) {
                     changedProps['fov'] = fov;
+                } else {
+                    // console.log("no need to upate")
                 }
             } else {
+                // console.log("set fov")
+                // console.log(fov)
                 changedProps['fov'] = fov;
             }
         }

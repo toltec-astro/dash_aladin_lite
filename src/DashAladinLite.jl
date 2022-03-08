@@ -15,13 +15,6 @@ function __init__()
             version = version,
             [
                 DashBase.Resource(
-    relative_package_path = "third_party/jquery-1.10.1.min.js",
-    external_url = "https://code.jquery.com/jquery-1.10.1.min.js",
-    dynamic = nothing,
-    async = nothing,
-    type = :js
-),
-DashBase.Resource(
     relative_package_path = "third_party/aladin.min.js",
     external_url = "https://aladin.u-strasbg.fr/AladinLite/api/v2/latest/aladin.min.js",
     dynamic = nothing,

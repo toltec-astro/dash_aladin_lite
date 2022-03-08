@@ -66,11 +66,6 @@ _js_dist.extend(
 _js_dist.extend(
     [
         {
-            'relative_package_path': 'third_party/jquery-1.10.1.min.js',
-    'external_url': 'https://code.jquery.com/jquery-1.10.1.min.js',
-            'namespace': package_name,
-        },
-        {
             'relative_package_path': 'third_party/aladin.min.js',
     'external_url': 'https://aladin.u-strasbg.fr/AladinLite/api/v2/latest/aladin.min.js',
             'namespace': package_name,
@@ -98,6 +93,9 @@ _css_dist = [
             'namespace': package_name,
         },
     ]
+
+
+JQUERY = 'https://code.jquery.com/jquery-1.12.4.min.js'
 
 
 for _component in __all__:

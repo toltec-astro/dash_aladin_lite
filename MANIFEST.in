@@ -1,8 +1,7 @@
 include dash_aladin_lite/dash_aladin_lite.min.js
 include dash_aladin_lite/dash_aladin_lite.min.js.map
-include dash_aladin_lite/third_party/aladin.min.js
-include dash_aladin_lite/third_party/jquery-1.10.1.min.js
-include dash_aladin_lite/third_party/aladin.min.css
+include dash_aladin_lite/third_party/*.js
+include dash_aladin_lite/third_party/*.css
 include dash_aladin_lite/async-*.js
 include dash_aladin_lite/async-*.js.map
 include dash_aladin_lite/*-shared.js
