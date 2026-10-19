@@ -1,0 +1,30 @@
+{
+  "name": "dash_aladin_lite",
+  "version": "2.0.0",
+  "description": "Aladin Lite sky atlas as a Dash component.",
+  "license": "BSD-3-Clause",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/toltec-astro/dash_aladin_lite.git"
+  },
+  "author": "Zhiyuan Ma <zhiyuanma@umass.edu>",
+  "scripts": {
+    "build:js": "webpack --mode production",
+    "build:backends": "ln -sfn src/dash_aladin_lite dash_aladin_lite && dash-generate-components ./src/ts/components dash_aladin_lite -p package-info.json; status=$?; rm dash_aladin_lite; exit $status",
+    "build": "npm run build:js && npm run build:backends"
+  },
+  "dependencies": {
+    "aladin-lite": "3.8.2"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.0",
+    "react": "18.3.1",
+    "react-docgen": "^5.4.3",
+    "react-dom": "18.3.1",
+    "ts-loader": "^9.5.0",
+    "typescript": "^5.9.0",
+    "webpack": "^5.100.0",
+    "webpack-cli": "^6.0.0"
+  }
+}

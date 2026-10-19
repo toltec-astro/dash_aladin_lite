@@ -1,0 +1,119 @@
+[build-system]
+requires = ["setuptools>=84.0", "setuptools_scm[toml]>=10.3"]
+build-backend = "setuptools.build_meta"
+
+
+[project]
+name = "dash_aladin_lite"
+authors = [
+  { name = "Zhiyuan Ma", email = "zhiyuanma@umass.edu" },
+]
+description = "Aladin Lite sky atlas as a Dash component."
+readme = "README.md"
+license = "BSD-3-Clause"
+license-files = ["LICENSE"]
+requires-python = ">=3.12"
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Framework :: Dash",
+  "Intended Audience :: Science/Research",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3 :: Only",
+  "Topic :: Scientific/Engineering :: Astronomy",
+  "Typing :: Typed",
+]
+dynamic = ["version"]
+dependencies = [
+  "dash>=4.4.1",
+  "pydantic>=2.11",
+  "astropy",
+  "numpy",
+]
+
+[project.urls]
+Homepage = "https://github.com/toltec-astro/dash_aladin_lite"
+"Bug Tracker" = "https://github.com/toltec-astro/dash_aladin_lite/issues"
+
+
+[dependency-groups]
+test = [
+  "pytest >=9.1",
+  "pytest-doctestplus",
+]
+example = [
+  "dash-ag-grid",
+]
+dev = [
+  { include-group = "test" },
+  { include-group = "example" },
+]
+
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["dash_aladin_lite"]
+
+[tool.setuptools.package-data]
+# The built component (committed; see the README) and its metadata.
+dash_aladin_lite = ["*.js", "*.json"]
+
+
+[tool.setuptools_scm]
+
+[tool.uv]
+# Rebuild the project, and so read its version from git again, when a commit
+# or a tag is added.
+cache-keys = [
+  { file = "pyproject.toml" },
+  { git = { commit = true, tags = true } },
+]
+
+
+[tool.pytest]
+minversion = "9.1"
+addopts = ["-ra", "--showlocals"]
+strict = true
+filterwarnings = [
+  "error",
+]
+doctest_plus = "enabled"
+testpaths = [
+  "tests",
+  "src/dash_aladin_lite",
+]
+
+
+[tool.ruff]
+show-fixes = true
+# Written by dash-generate-components.
+extend-exclude = [
+  "src/dash_aladin_lite/AladinLite.py",
+  "src/dash_aladin_lite/_imports_.py",
+]
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = [
+  "COM812",  # Trailing commas are the formatter's job
+  "CPY001",  # No copyright notice in every file
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = [
+  "D",        # Tests need no docstrings
+  "INP001",   # tests/ is not a package
+  "PLR2004",  # Literal values are fine in assertions
+  "S101",     # pytest uses assert
+]
+"examples/**" = [
+  "INP001",   # examples/ is not a package
+]
+
+[tool.ruff.lint.flake8-type-checking]
+# Pydantic reads annotations at runtime, so the imports they use must stay real.
+runtime-evaluated-base-classes = [
+  "pydantic.BaseModel",
+]
+
+[tool.ruff.lint.pydocstyle]
+convention = "numpy"
